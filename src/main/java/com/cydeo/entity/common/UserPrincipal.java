@@ -58,4 +58,8 @@ public class UserPrincipal implements UserDetails { // It's like Mapper (User DB
         return this.user.isEnabled();
     }
 
+    public Long getId() {
+        return this.user.getId();
+    }
+
 }
