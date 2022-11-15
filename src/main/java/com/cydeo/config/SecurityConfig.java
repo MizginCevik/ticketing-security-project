@@ -18,6 +18,11 @@ import java.util.List;
 @Configuration
 public class SecurityConfig {
 
+    // to authenticate objects
+    // assuming there is no connection with DB
+    // created two hardcoded users which will be authenticated
+    // return one of the implementations of UserDetailsService
+    // those impl classes show us where users will be saved
 //    @Bean
 //    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
 //
@@ -27,19 +32,23 @@ public class SecurityConfig {
 //
 //        userList.add(new User("ozzy",encoder.encode("password"), Arrays.asList(new SimpleGrantedAuthority("ROLE_MANAGER"))));
 //
-//
 //        return new InMemoryUserDetailsManager(userList);
 //
 //    }
 
-    //authorizeRequests() -> checking authorization for each
-    //permitAll() -> anybody can access it
-    //httpBasic() -> brings pop up box to enter username and password
+    //authorizeRequests() -> everything needs to be authorized, checking authorization for each roles
+    //antMatchers() -> defining pages which needs to be excluded / defining which pages will be seen by roles
+    //permitAll() -> make everyone to access these pages
+    //anyRequest().authenticated() -> any other requests need to be authenticated
+    //httpBasic() -> pop up box from security appears
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeRequests()
 //                .antMatchers("/user/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasAuthority("Admin")
+                .antMatchers("/project/**").hasAuthority("Manager")
+                .antMatchers("/task/**").hasAuthority("Manager")
+                .antMatchers("/task/employee/**").hasAuthority("Employee")
 //                .antMatchers("/project/**").hasRole("MANAGER")
 //                .antMatchers("/task/employee/**").hasRole("EMPLOYEE")
 //                .antMatchers("/task/**").hasRole("MANAGER")

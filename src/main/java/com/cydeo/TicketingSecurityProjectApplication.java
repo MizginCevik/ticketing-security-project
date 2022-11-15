@@ -19,9 +19,9 @@ public class TicketingSecurityProjectApplication {
         return new ModelMapper();
     }
 
-    @Bean
+    @Bean // to encode passwords
     public PasswordEncoder passwordEncoder() { // It's an interface
         return new BCryptPasswordEncoder(); // using one of the implementations
-    }
+    } // it takes password and changes to encoded structure because it can not be saved as raw
 
 }

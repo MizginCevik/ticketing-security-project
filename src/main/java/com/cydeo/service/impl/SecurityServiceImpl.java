@@ -22,7 +22,7 @@ public class SecurityServiceImpl implements SecurityService {
         //get the user from db and convert to user Spring understands by using UserPrincipal
         User user = userRepository.findByUserNameAndIsDeleted(username,false);
 
-        if (user==null) {
+        if (user==null) { // validation
             throw new UsernameNotFoundException(username);
         }
 
