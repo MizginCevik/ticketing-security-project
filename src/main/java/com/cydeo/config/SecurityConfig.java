@@ -54,7 +54,13 @@ public class SecurityConfig {
 //                .antMatchers("/task/**").hasRole("MANAGER")
 //                .antMatchers("/task/**").hasAnyRole("EMPLOYEE","ADMIN")
 //                .antMatchers("/task/**").hasAuthority("ROLE_EMPLOYEE") // no DB
-                .antMatchers("/","/login","/fragments/**","/assets/**","/images/**")
+                .antMatchers(
+                        "/",
+                        "/login",
+                        "/fragments/**",
+                        "/assets/**",
+                        "/images/**"
+                )
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
